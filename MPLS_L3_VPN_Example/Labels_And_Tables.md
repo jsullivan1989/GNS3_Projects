@@ -28,4 +28,42 @@ Possible completions:
 
 ```
 
-UNDER CONSTRUCTION
+## MPLS.0 Table
+
+We'll start off with the mpls.0 table.  This table is created when any interface is enabled with MPLS.  On PE1, this is done under ge-0/0/4. Let's take a look at ours looks like on PE1.
+
+```
+
+jsullivan@EVO-Sullivan-PE1> show route table mpls.0 
+
+mpls.0: 11 destinations, 11 routes (11 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0                  *[MPLS/0] 01:01:40, metric 1
+                       to table inet.0
+0(S=0)             *[MPLS/0] 01:01:40, metric 1
+                       to table mpls.0
+1                  *[MPLS/0] 01:01:40, metric 1
+                       Receive
+2                  *[MPLS/0] 01:01:40, metric 1
+                       to table inet6.0
+2(S=0)             *[MPLS/0] 01:01:40, metric 1
+                       to table mpls.0
+13                 *[MPLS/0] 01:01:40, metric 1
+                       Receive
+16                 *[VPN/0] 01:01:40
+                    >  via lsi.0 (Customer-A), Pop      
+17                 *[VPN/0] 01:01:40
+                    >  via lsi.1 (Customer-B), Pop      
+299840             *[LDP/9] 00:11:34, metric 1
+                    >  to 10.0.0.1 via ge-0/0/4.0, Pop      
+299840(S=0)        *[LDP/9] 00:11:34, metric 1
+                    >  to 10.0.0.1 via ge-0/0/4.0, Pop      
+299856             *[LDP/9] 00:11:34, metric 1
+                    >  to 10.0.0.1 via ge-0/0/4.0, Swap 299776
+
+```
+
+The first label we see is zero and the action tells us to look at inet.0. As you may or may not know, this is also referred as an "Explicit Null" label.
+
+TO BE CONTINUED
